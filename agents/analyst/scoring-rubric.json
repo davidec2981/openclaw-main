@@ -1,0 +1,46 @@
+{
+  "categories": [
+    {
+      "name": "Team",
+      "maxScore": 25,
+      "description": "Valutazione del team e trasparenza"
+    },
+    {
+      "name": "Legitimacy",
+      "maxScore": 20,
+      "description": "Legittimità del progetto"
+    },
+    {
+      "name": "Community",
+      "maxScore": 15,
+      "description": "Forza della community"
+    },
+    {
+      "name": "Red Flags",
+      "maxScore": 20,
+      "description": "Penalità per red flags"
+    },
+    {
+      "name": "ROI Potenziale",
+      "maxScore": 30,
+      "description": "Potenziale ritorno sull'investimento"
+    }
+  ],
+  "classification": {
+    "green": {
+      "minScore": 65,
+      "label": "🟢 PROMOSSO",
+      "action": "post"
+    },
+    "yellow": {
+      "minScore": 40,
+      "label": "🟡 DA VALUTARE",
+      "action": "review"
+    },
+    "red": {
+      "minScore": 0,
+      "label": "🔴 SCARTATO",
+      "action": "discard"
+    }
+  }
+}

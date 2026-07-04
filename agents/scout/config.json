@@ -1,0 +1,53 @@
+{
+  "sources": [
+    {
+      "name": "airdrops.io",
+      "type": "directory",
+      "url": "https://airdrops.io",
+      "filters": {
+        "recentDays": 14,
+        "minScore": 0
+      }
+    },
+    {
+      "name": "airdropalert.com",
+      "type": "directory",
+      "url": "https://airdropalert.com",
+      "filters": {
+        "recentDays": 14,
+        "minScore": 0
+      }
+    },
+    {
+      "name": "freeairdrop.io",
+      "type": "directory",
+      "url": "https://freeairdrop.io",
+      "filters": {
+        "recentDays": 14,
+        "minScore": 0
+      }
+    },
+    {
+      "name": "airdropsmob.com",
+      "type": "directory",
+      "url": "https://airdropsmob.com",
+      "filters": {
+        "recentDays": 14,
+        "minScore": 0
+      }
+    },
+    {
+      "name": "airdropbob.com",
+      "type": "directory",
+      "url": "https://airdropbob.com",
+      "filters": {
+        "recentDays": 14,
+        "minScore": 0
+      }
+    }
+  ],
+  "output": {
+    "candidates": 5,
+    "maxCandidates": 10
+  }
+}

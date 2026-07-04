@@ -1,0 +1,24 @@
+{
+  "critical": [
+    "Richiede KYC completo",
+    "Richiede acquisto token",
+    "Richiesta di chiavi private",
+    "Wallet obbligatorio con fondi minimi",
+    "Team anonimo o non verificabile",
+    "Nessuna whitepaper o documentazione",
+    "Sito web non funzionante"
+  ],
+  "warning": [
+    "Solo per residenti USA",
+    "Solo per residenti Cina",
+    "Difficoltà eccessiva per neofiti",
+    "Tempo di completamento > 1 ora",
+    "Informazioni limitate sul progetto",
+    "Nessun social media attivo",
+    "Tokenomics poco chiara"
+  ],
+  "scoring": {
+    "critical": -20,
+    "warning": -10
+  }
+}
