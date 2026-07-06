@@ -58,44 +58,48 @@ def run_hermes(prompt):
         env["HERMES_DEFAULT_MODEL"] = "deepseek/deepseek-v4-pro"
         env["PYTHONUNBUFFERED"] = "1"
 
+        # Use --query for single-shot execution (much more reliable)
+        cmd = [
+            "docker", "exec", "hermes-agent",
+            "/opt/hermes/.venv/bin/python3", "/opt/hermes/cli.py",
+            "--model", "deepseek/deepseek-v4-pro",
+            "--query", prompt,
+        ]
         result = subprocess.run(
-            [
-                "docker", "exec", "-i", "hermes-agent",
-                "/opt/hermes/.venv/bin/python3", "/opt/hermes/cli.py",
-                "--non-interactive",
-            ],
-            input=prompt.encode("utf-8"),
+            cmd,
             capture_output=True,
-            timeout=120,
+            timeout=180,
             env=env,
         )
         stdout = result.stdout.decode("utf-8", errors="replace")
         stderr = result.stderr.decode("utf-8", errors="replace")
 
         stdout = clean_ansi(stdout)
-        stderr = clean_ansi(stderr)
 
-        # Extract response - skip hermes UI boilerplate
-        lines = stdout.split('\n')
-        clean = []
-        skip_patterns = [
-            '❯', '─', 'ctx', 'Welcome to Hermes', 'Tip:', '⚠', '⚕',
-            'tools', 'skills', '/help', 'Quick commands',
-        ]
-        for l in lines:
-            stripped = l.strip()
-            if not stripped:
-                continue
-            if any(p in stripped for p in skip_patterns):
-                continue
-            if stripped == prompt.strip():
-                continue
-            clean.append(stripped)
+        # Extract the content between ── lines (Hermes response box)
+        import re
+        # Match content between ╭─...╮ and ╰─...╯
+        match = re.search(r'╭─[^╮]*╮\n(.*?)\n╰─', stdout, re.DOTALL)
+        if match:
+            response = match.group(1).strip()
+        else:
+            # Fallback: try after "Query:" line
+            lines = stdout.split('\n')
+            result_lines = []
+            capture = False
+            for l in lines:
+                if l.startswith('Query:'):
+                    capture = True
+                    continue
+                if capture and ('╭' in l or '╰' in l):
+                    continue
+                if capture and l.strip() and not l.startswith('Resume'):
+                    result_lines.append(l.strip())
+            if result_lines:
+                response = '\n'.join(result_lines)
+            else:
+                response = "✅ Eseguito (nessun output testuale)."
 
-        if not clean:
-            return "✅ Eseguito (nessun output testuale)."
-
-        response = "\n".join(clean[-30:])
         if len(response) > 4000:
             response = response[:3997] + "..."
 

@@ -1,6 +1,6 @@
 # MEMORY.md — Durable Knowledge
 
-_Last promoted: 2026-07-03 07:52 UTC_
+_Last promoted: 2026-07-06 00:06 UTC_
 
 ## Active Projects & Systems
 
@@ -36,28 +36,28 @@ _Last promoted: 2026-07-03 07:52 UTC_
 - **Equity**: $59,760.00, 0 open positions, 0 P&L
 - **Behavior**: Properly reporting "nessun segnale" — bot is alive but market flat
 
+### Hermes Agent (NousResearch) — Nuovo 🆕
+- **Installato**: 2026-07-05, container Docker su Ubuntu server
+- **Container**: `hermes-agent`, immagine buildata da GitHub, porta 8081
+- **Telegram bot**: @Hermesdvdbot, connesso via gateway nativo Hermes (senza bridge Python)
+- **Provider**: DeepSeek diretto via `DEEPSEEK_API_KEY` (stessa key usata da OpenClaw)
+- **Modello**: deepseek-v4-pro (nativo, provider: `deepseek`)
+- **Config**: gateway avviato con `gateway run --accept-hooks`, profilo default con provider deepseek
+- **Model**: default `anthropic/claude-opus-4.6` sovrascritto con `deepseek/deepseek-v4-pro` tramite config YAML
+- **Systemd**: gateway si auto-avvia dentro Docker con restart: unless-stopped
+- **Note**: Il container non ha accesso TTY — la configurazione del modello va fatta via file YAML su /opt/hermes-data/, non via `hermes model` interattivo
+- **Home channel**: /sethome inviato su @Hermesdvdbot
+
 ### OpenClaw Infrastructure
 - **Current version**: 2026.6.11 (updated July 1, 2026 from 2026.5.20)
-- **Active model**: deepseek/deepseek-v4-pro (⚠️ not in allowed models list — silently falls back to flash on some paths)
+- **Active model**: deepseek/deepseek-v4-flash (⚠️ not in allowed models list — silently falls back to flash on some paths)
 - **⚠️ OpenRouter credits EXHAUSTED** (discovered July 3 00:04 UTC): The `openai/deepseek/deepseek-v4-pro` routing path returns 402. Only the direct `deepseek/deepseek-v4-pro` path remains operational. All agents depending on the openai→deepseek route will fail.
 - **Gateway**: Running manually (pid varies after restarts), port 18789. Systemd service DISABLED after July 2 restart-loop incident (counter reached 487).
 
-#### July 1 Update + Recovery
-- Update corrupted config — `dist/` entry point mismatch, Telegram channels wiped. Full-day outage. Recovered via `npm run build` + `~/.openclaw/backup/` config restore.
-- **Pre-update checklist**: Snapshot full config directory before any future `openclaw update`.
-
-#### July 2 — Telegram Plugin Catastrophic Failure
-- **All 7 Telegram bots non-functional** since ~08:50 UTC. Communication shifted to webchat.
-- **Root cause: Two bugs in v2026.6.11 plugin compile**:
-  - **Bug 1** — `threadId.trim is not a function`: `parseTelegramThreadId()` in compiled dist (`sent-message-cache-BNy8x8Gj.js`) calls `.trim()` on threadId without type guard. When threadId is not a string (undefined, object, from webchat context), it crashes all outbound delivery.
-  - **Bug 2** — `finiteSecondsToTimerSafeMilliseconds is not a function`: The Telegram plugin source (`extensions/telegram/src/request-timeouts.ts:3`) imports this from `openclaw/plugin-sdk/number-runtime`, but the function was **never exported** from the runtime bundle (`number-runtime-C7CNv3wi.js`). This causes all 7 bot channels to fail at provider startup with `channel exited`. Both bugs must be present simultaneously for total Telegram outage.
-- **Hot-patches applied to dist**:
-  - Added `if (typeof threadId !== "string") return;` guard before `.trim()` in `sent-message-cache-BNy8x8Gj.js`
-  - Manually appended `finiteSecondsToTimerSafeMilliseconds` + `MAX_TIMER_TIMEOUT_MS` functions to `number-runtime-C7CNv3wi.js`
-- **⚠️ WARNING**: Hot-patches will be **wiped on next `openclaw update` or `npm run build`**. Need to re-apply or wait for upstream fix (2026.6.12+).
-- **Bot tokens**: All 7 tokens invalidated simultaneously (July 2, ~15:30 UTC). User replaced default bot token (830138…jKwI). Other 6 bot tokens still dead. Token reset cause: unknown (possibly BotFather regeneration).
-- **Gateway restart behavior**: `SIGUSR1` hot-reload does NOT reload secret-protected config paths (bot tokens, API keys). Full gateway kill + restart is needed for token changes.
-- **Systemd restart loop**: After gateway restarts, systemd tried to launch new instances (counter 487) while port 18789 occupied. Service now `inactive (dead)`. Gateway started manually.
+#### Git Backup — 6 Repos (user: davidec2981)
+- **Repos**: openclaw-main, openclaw-trading, openclaw-airdrop, openclaw-polyclaw, openclaw-robocop, openclaw-aihf
+- **Cron backup**: `0 5 * * *` Europe/Rome, script `/root/.openclaw/workspace/scripts/backup-github.sh`
+- **Last push**: 2026-07-05 — full backup + Hermes Telegram bridge (poi rimosso a favore del gateway nativo)
 
 #### Known Issues
 - **OpenRouter credits depleted** — top up at https://openrouter.ai/settings/credits. Affects all agents routing through `openai/deepseek/*`.
@@ -68,6 +68,7 @@ _Last promoted: 2026-07-03 07:52 UTC_
 - **Memory dreaming** cycles occasionally crash mid-generation (context window issues on fallback model; 00:04 July 3 cycle failed twice)
 - **Dist hot-patches** are fragile — will be lost on update/build
 - **Context window risk**: Memory corpus exceeding fallback model limits when primary path dead
+- **Hermes Docker container**: no TTY — model config must be done via YAML files, not `hermes model` interactive
 
 ## User Preferences & Context
 - **Name**: Dade (Telegram handle/display name)
@@ -84,5 +85,4 @@ _Last promoted: 2026-07-03 07:52 UTC_
 - **Telegram plugin**: Currently patched in dist — fragile. Both bugs (threadId.trim, finiteSecondsToTimerSafeMilliseconds) break ALL outbound messaging on v2026.6.11. Webchat is the reliable fallback.
 
 ## Recent Sessions
-- **2026-07-02 08:48–15:56 UTC** (session `21fa0d20`, 455 lines): Dade reconnected via webchat after connection loss. Diagnosed Telegram outage. Discovered two compiler bugs in plugin. Applied hot-patches. Replaced default bot token. Systemd restart loop stopped. Gateway stable with manual start.
-- **2026-07-03 00:04 UTC** (session `36624075`): Memory dreaming cycle failed twice — OpenRouter 402 (credits exhausted) then deepseek-direct abort. No user activity in 12-hour window. System is running on a single model path.
+- **2026-07-05 15:04–23:58 UTC** (session `ff684424`): Installed Docker + Hermes Agent (NousResearch) in container. Configured DeepSeek provider directly. Created @Hermesdvdbot Telegram bot. Connected via native Hermes gateway (initially created Python bridge, later replaced with native gateway). Git pushed all 6 repos. Cron backup configured daily 05:00 IT. Model config fixed via YAML files.
