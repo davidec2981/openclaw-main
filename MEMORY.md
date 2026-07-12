@@ -77,6 +77,7 @@ _Last promoted: 2026-07-06 00:06 UTC_
 - **Crypto**: Airdrop farming focused, cost-conscious (gas optimization matters)
 - **Business tools**: Odoo migration in progress, tax optimization evaluated (Gegidze Georgia IE — deemed not worthwhile for Italian resident freelancer on forfettario)
 - **Timezone**: Rome (CET/CEST, UTC+1/+2)
+- **⚠️ Peak pricing**: DeepSeek API costa 2× su TUTTI i modelli nelle fasce 08:00–12:00 e 15:00–18:00 (UTC+2, timezone Roma). In vigore da inizio luglio 2026. Attività token-intense da concentrare fuori da queste finestre.
 
 ## System Health Notes
 - **Recurring**: `[assistant turn failed before producing content]` — appears in ~30% of dream-synthesis attempts. Likely related to model timeouts on free-tier fallbacks.
