@@ -1,0 +1,126 @@
+{
+  "initial_capital": 100.0,
+  "capital": 91.21602350911056,
+  "trade_list": [
+    {
+      "entry_time": "2026-05-18 03:00:00",
+      "exit_time": "2026-05-18 12:00:00",
+      "side": "SHORT",
+      "entry_price": 76924.65,
+      "exit_price": 77648.91,
+      "pnl_pct": -0.9415,
+      "pnl": -2.7
+    },
+    {
+      "entry_time": "2026-05-31 12:00:00",
+      "exit_time": "2026-06-01 01:00:00",
+      "side": "SHORT",
+      "entry_price": 73920.0,
+      "exit_price": 73371.84,
+      "pnl_pct": 0.7416,
+      "pnl": 4.4661
+    },
+    {
+      "entry_time": "2026-06-08 23:00:00",
+      "exit_time": "2026-06-08 23:00:00",
+      "side": "SHORT",
+      "entry_price": 63085.99,
+      "exit_price": 62578.97,
+      "pnl_pct": 0,
+      "pnl": 0.0
+    },
+    {
+      "entry_time": "2026-07-06 02:00:00",
+      "exit_time": "2026-07-06 05:00:00",
+      "side": "LONG",
+      "entry_price": 63422.0,
+      "exit_price": 63172.8012,
+      "pnl_pct": -0.39,
+      "pnl": -2.75
+    },
+    {
+      "entry_time": "2026-07-06 22:00:00",
+      "exit_time": "2026-07-07 03:00:00",
+      "side": "LONG",
+      "entry_price": 64319.36,
+      "exit_price": 63350.68200000001,
+      "pnl_pct": -1.51,
+      "pnl": -2.67
+    },
+    {
+      "entry_time": "2026-07-09 02:00:00",
+      "exit_time": "2026-07-09 02:00:00",
+      "side": "LONG",
+      "entry_price": 62067.22,
+      "exit_price": 61962.9314,
+      "pnl_pct": -0.17,
+      "pnl": -2.6
+    },
+    {
+      "entry_time": "2026-07-12 21:00:00",
+      "exit_time": "2026-07-12 22:00:00",
+      "side": "LONG",
+      "entry_price": 64198.82,
+      "exit_price": 64032.6187,
+      "pnl_pct": -0.26,
+      "pnl": -2.53
+    }
+  ],
+  "equity_history": [
+    {
+      "ts": 1779073200000,
+      "equity": 97.3
+    },
+    {
+      "ts": 1780228800000,
+      "equity": 101.77
+    },
+    {
+      "ts": 1780959600000,
+      "equity": 101.77
+    },
+    {
+      "ts": 1783303200000,
+      "equity": 101.77
+    },
+    {
+      "ts": 1783314000000,
+      "equity": 99.02
+    },
+    {
+      "ts": 1783375200000,
+      "equity": 99.02
+    },
+    {
+      "ts": 1783393200000,
+      "equity": 96.35
+    },
+    {
+      "ts": 1783562400000,
+      "equity": 96.35
+    },
+    {
+      "ts": 1783562400000,
+      "equity": 93.75
+    },
+    {
+      "ts": 1783890000000,
+      "equity": 93.75
+    },
+    {
+      "ts": 1783893600000,
+      "equity": 91.22
+    }
+  ],
+  "open_position": null,
+  "last_signal_time": "2026-07-12 19:00:00",
+  "params": {
+    "tpl": 15,
+    "vl": 30,
+    "dvt": 10,
+    "bd": 2.0,
+    "rr": 1.7,
+    "risk_pct": 2.7
+  },
+  "generated": "2026-06-16 23:20:38 UTC"
+}
