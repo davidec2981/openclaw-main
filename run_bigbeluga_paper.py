@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
-import sys, os
-sys.path.insert(0, '/root/.openclaw/workspace-trading/opentrade/live')
-os.chdir('/root/.openclaw/workspace-trading/opentrade')
-# Set __file__ so the script can compute BASE
-script_path = '/root/.openclaw/workspace-trading/opentrade/live/bigbeluga_paper.py'
-exec(compile(open(script_path).read(), script_path, 'exec'), {'__file__': script_path, '__name__': '__main__'})
+import subprocess, sys
+r = subprocess.run(
+    ["python3", "live/bigbeluga_paper.py"],
+    cwd="/root/.openclaw/workspace-trading/opentrade",
+    capture_output=True, text=True, timeout=120
+)
+print(r.stdout)
+if r.stderr:
+    print("STDERR:", r.stderr, file=sys.stderr)
+sys.exit(r.returncode)
