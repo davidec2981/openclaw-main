@@ -87,3 +87,22 @@ _Last promoted: 2026-07-06 00:06 UTC_
 
 ## Recent Sessions
 - **2026-07-05 15:04–23:58 UTC** (session `ff684424`): Installed Docker + Hermes Agent (NousResearch) in container. Configured DeepSeek provider directly. Created @Hermesdvdbot Telegram bot. Connected via native Hermes gateway (initially created Python bridge, later replaced with native gateway). Git pushed all 6 repos. Cron backup configured daily 05:00 IT. Model config fixed via YAML files.
+
+## Promoted From Short-Term Memory (2026-07-23)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-07-17.md:14:17 -->
+- Session: QMD + memory-wiki + session memory (20:23-20:27): **QMD**: installato `@tobilu/qmd@2.5.3` via npm global, configurato come backend memory; Provider: `qmd`, searchMode: `query` (hybrid con reranker); 3 collections per l'agente main, indice ~10MB; Modello GGUF per embedding/rerank in download automatico [score=0.806 recalls=0 avg=0.620 source=memory/2026-07-17.md:14-17]
+<!-- openclaw-memory-promotion:memory:memory/2026-07-17.md:18:21 -->
+- Session: QMD + memory-wiki + session memory (20:23-20:27): **Memory-wiki**: abilitato in bridge mode su `memory-core`; 815 bridge artifacts importati, 824 pagine compilate, 9 report generati; Vault: `~/.openclaw/wiki/main`; Dashboard attive: claim-health, stale-pages, open-questions, contradictions, ecc. [score=0.806 recalls=0 avg=0.620 source=memory/2026-07-17.md:18-21]
+<!-- openclaw-memory-promotion:memory:memory/2026-07-17.md:22:24 -->
+- Session: QMD + memory-wiki + session memory (20:23-20:27): **Session memory**: abilitato (`sources: ["memory","sessions"]`); QMD indicizza anche le trascrizioni delle conversazioni passate; **Config backup**: `/root/.openclaw/openclaw.json.backup-20260717_201527-pre-memory-fix` [score=0.806 recalls=0 avg=0.620 source=memory/2026-07-17.md:22-24]
+<!-- openclaw-memory-promotion:memory:memory/2026-07-17.md:27:30 -->
+- Stato Finale: memory-core: **attivo** su tutti e 9 gli agenti; Dreaming sweep: 03:00 Europe/Rome; QMD backend: funzione, embeddings in download (1.2GB GGUF); Active memory: riconfigurato con memory_search/memory_get [score=0.806 recalls=0 avg=0.620 source=memory/2026-07-17.md:27-30]
+<!-- openclaw-memory-promotion:memory:memory/2026-07-17.md:31:32 -->
+- Stato Finale: Memory-wiki: attivo, 824 pagine, bridge mode; Session memory: attivo [score=0.806 recalls=0 avg=0.620 source=memory/2026-07-17.md:31-32]
+<!-- openclaw-memory-promotion:memory:memory/2026-07-17.md:35:37 -->
+- Knon Issues: 50000 live row limit sul plugin state (ereditato) — non blocca runtime; Modello GGUF in download ~1.2GB (primo embedding sarà lento); CPU-only, nessuna GPU — embedding su CPU sarà più lento [score=0.806 recalls=0 avg=0.620 source=memory/2026-07-17.md:35-37]
+<!-- openclaw-memory-promotion:memory:memory/2026-07-17.md:4:7 -->
+- Session: Memory System Repair & Upgrade: **Ore**: 20:15-20:27 UTC; **Richiesta**: Dade ha notato che gli agenti dimenticano troppo spesso decisioni e impostazioni recenti; **Analisi e repair** (20:15-20:23):; ✅ **memory-core** riabilitato (era `enabled: false`) [score=0.806 recalls=0 avg=0.620 source=memory/2026-07-17.md:4-7]
+<!-- openclaw-memory-promotion:memory:memory/2026-07-17.md:8:11 -->
+- Session: Memory System Repair & Upgrade: ✅ **Dreaming** attivato: ogni notte alle 03:00 Europe/Rome (light → REM → deep sweep); ✅ **Memory search** attivato (prima FTS-only, poi passato a QMD); ✅ **active-memory plugin** riconfigurato: `toolsAllow` da `["gm_search","gm_record","gm_stats"]` a `["memory_search","memory_get"]`; ✅ Indice FTS ricostruito: 12 file, 57 chunks [score=0.806 recalls=0 avg=0.620 source=memory/2026-07-17.md:8-11]
